@@ -1,0 +1,20 @@
+uuid: ffdeadef-9e55-4afb-8539-1ad5b8750615
+langcode: en
+status: true
+dependencies:
+  theme:
+    - drupal_site
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: drupal_site_page_title
+theme: drupal_site
+region: sidebar_first
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Drupal Site's theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function drupal_site_preprocess_field(&$variables) {
+  // Apply this to any video field.
+  if ($variables['element']['#field_name'] == 'field_media_oembed_video') {
+    $object = $variables['element']['#object'];
+    $url = $object->get('field_media_oembed_video')->value;
+
+    if ($url) {
+      // Check if it's a full or shortened YouTube URL.
+      if (strpos($url, 'youtu.be') !== FALSE) {
+        // Shortened URL, extract video ID by exploding the URL and getting it from there.
+        $url_parts = explode('/', $url);
+        $variables['video_id'] = end($url_parts);
+      }
+      else {
+        // Full URL, extract video ID using query parameters.
+        parse_str(parse_url($url, PHP_URL_QUERY), $url_array);
+        $variables['video_id'] =  $url_array['v'];
+      }
+    }
+    $variables['video_title'] = $variables['items'][0]['content']['#attributes']['title'];
+  }
+}

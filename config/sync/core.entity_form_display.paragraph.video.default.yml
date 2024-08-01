@@ -1,0 +1,30 @@
+uuid: 5d8e204e-dbcd-4cbc-9f50-2b59a318f6c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video.field_remote_video
+    - paragraphs.paragraphs_type.video
+  module:
+    - inline_entity_form
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_remote_video:
+    type: inline_entity_form_simple
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+      revision: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

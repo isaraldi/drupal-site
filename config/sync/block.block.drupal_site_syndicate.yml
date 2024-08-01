@@ -1,0 +1,23 @@
+uuid: c2c26223-1b64-458d-ac92-453c24c81885
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - drupal_site
+_core:
+  default_config_hash: 0gq3VPg-_UM69FCCWurLFIrrnIjC2HLKhwo9iQNtcUo
+id: drupal_site_syndicate
+theme: drupal_site
+region: sidebar_first
+weight: 0
+provider: null
+plugin: node_syndicate_block
+settings:
+  id: node_syndicate_block
+  label: 'RSS feed'
+  label_display: '0'
+  provider: node
+  block_count: 10
+visibility: {  }

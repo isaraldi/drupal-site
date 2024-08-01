@@ -1,0 +1,22 @@
+uuid: 40dadb3f-0444-4938-94c4-2c72c4eeac3b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal_site
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: drupal_site_content
+theme: drupal_site
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

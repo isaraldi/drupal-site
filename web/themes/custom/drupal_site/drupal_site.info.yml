@@ -1,0 +1,7 @@
+name: Drupal Site
+type: theme
+description: A custom theme for Drupal Site
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10
+base theme: olivero
+hidden: false
