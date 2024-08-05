@@ -1,0 +1,10 @@
+name: 'Personalized Form'
+type: module
+description: 'Personalized Form that provides a simple form.'
+core_version_requirement: ^8 || ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:field
+  - drupal:options
+  - drupal:system
+version: '1.0'

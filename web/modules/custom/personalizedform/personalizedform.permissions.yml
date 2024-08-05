@@ -1,0 +1,4 @@
+access personalizedform:
+  title: 'Access Personalized Form'
+  description: 'Permission to access the Personalized Form.'
+  restrict access: TRUE
