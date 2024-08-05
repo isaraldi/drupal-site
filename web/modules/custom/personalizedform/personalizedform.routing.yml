@@ -1,0 +1,7 @@
+personalizedform.form:
+  path: '/personalized-form'
+  defaults:
+    _form: '\Drupal\personalizedform\Form\PersonalizedForm'
+    _title: 'Personalized Form'
+  requirements:
+    _permission: 'access personalizedform'

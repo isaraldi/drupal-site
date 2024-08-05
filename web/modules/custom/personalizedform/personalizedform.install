@@ -1,0 +1,37 @@
+<?php
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_install().
+ */
+function personalizedform_install() {
+  // Code to create the table is already in personalizedform_data.
+  $schema = Database::getConnection()->schema();
+  $schema->createTable('personalizedform_data', [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'text_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'select_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ]);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function personalizedform_uninstall() {
+  $schema = \Drupal::database()->schema();
+  $schema->dropTable('personalizedform_data');
+}
