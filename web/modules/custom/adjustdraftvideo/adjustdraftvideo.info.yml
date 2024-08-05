@@ -1,0 +1,6 @@
+name: 'Personalized Draft Video'
+type: module
+description: 'Publish the draft and ensure the video URL changes go live along with any other changes made to the node.'
+core_version_requirement: ^8 || ^9 || ^10
+package: Custom
+version: '1.0'

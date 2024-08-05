@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+*/
+function adjustdraftvideo_node_presave(Drupal\node\Entity\Node $node) {
+  // Check if the node is being unpublished.
+  if ($node->isNewRevision() && !$node->isPublished()) {
+    // Load the field_components paragraphs.
+    if ($node->hasField('field_components')) {
+      $components = $node->get('field_components')->referencedEntities();
+      foreach ($components as $component) {
+        if ($component->hasField('field_remote_video')) {
+          $video_paragraphs = $component->get('field_remote_video')->referencedEntities();
+          foreach ($video_paragraphs as $video_paragraph) {
+            // Set the status of the video paragraph to unpublished.
+            $video_paragraph->setUnpublished();
+            $video_paragraph->save();
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for node entities.
+ */
+function adjustdraftvideo_node_update(Drupal\node\Entity\Node $node) {
+    // Check if the node is being published.
+    if ($node->isPublished()) {
+      // Load the field_components paragraphs.
+      if ($node->hasField('field_components')) {
+        $components = $node->get('field_components')->referencedEntities();
+        foreach ($components as $component) {
+          if ($component->hasField('field_remote_video')) {
+            $video_paragraphs = $component->get('field_remote_video')->referencedEntities();
+            foreach ($video_paragraphs as $video_paragraph) {
+              // Set the status of the video paragraph to published.
+              if (!$video_paragraph->isPublished()) {
+                $video_paragraph->setPublished();
+                $video_paragraph->save();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
