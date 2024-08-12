@@ -1,0 +1,9 @@
+name: Zoocha Video Sync
+type: module
+description: Synchronizes the publication state of videos with their parent node, allowing individual video state control when the parent is published.
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:node
+  - drupal:media
+version: '1.0'

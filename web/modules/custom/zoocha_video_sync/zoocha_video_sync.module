@@ -1,0 +1,27 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_entity_presave().
+ *
+ * Ensures that video publishing status is synchronized with the parent node.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity being saved.
+ */
+function zoocha_video_sync_entity_presave(EntityInterface $entity) {
+  // Ensure we are dealing with a node entity and specifically a landing page.
+  if ($entity instanceof NodeInterface && $entity->bundle() === 'landing_page') {
+    /** @var \Drupal\zoocha_video_sync\Services\VideoPublishingService $service */
+    $service = \Drupal::service('zoocha_video_sync.video_publishing_service');
+    // Synchronize video state with error handling.
+    try {
+      $service->synchronizeVideoState($entity);
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('zoocha_video_sync')->error('Error synchronizing video state for node ID ' . $entity->id() . ': ' . $e->getMessage());
+    }
+  }
+}

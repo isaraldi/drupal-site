@@ -1,0 +1,9 @@
+services:
+  zoocha_video_sync.video_publishing_service:
+    class: Drupal\zoocha_video_sync\Services\VideoPublishingService
+    arguments: ['@entity_type.manager', '@logger.channel.zoocha_video_sync']
+
+  logger.channel.zoocha_video_sync:
+    class: Drupal\Core\Logger\LoggerChannelFactory
+    factory: ['@logger.factory', 'get']
+    arguments: ['zoocha_video_sync']
