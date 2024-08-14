@@ -1,6 +1,49 @@
 <?php
 
-/**
- * @file
- * Contains drupal_site_core.module.
- */
+// /**
+//  * @file
+//  * Contains drupal_site_core.module.
+//  */
+
+function drupal_site_core_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+    if ($entity->getEntityTypeId() == 'media' && $entity->bundle() == 'remote_video') {
+        $node = \Drupal::routeMatch()->getParameter('node');
+        
+        if ($node && !$node->isDefaultRevision()) {
+            
+            if ($entity->hasField('moderation_state') && $entity->get('moderation_state')->value !== 'draft') {
+                
+                $violations = $entity->validate();
+                if (count($violations) > 0) {
+                    foreach ($violations as $violation) {
+                        \Drupal::messenger()->addError($violation->getMessage());
+                    }
+                    return;
+                }
+
+                if (!\Drupal::currentUser()->hasPermission('edit media')) {
+                    \Drupal::messenger()->addError('You do not have permission to edit this media entity.');
+                    return;
+                }
+                
+                $entity->set('moderation_state', 'draft');
+                
+                $entity->setNewRevision(TRUE);
+                
+                $entity->setRevisionUserId(\Drupal::currentUser()->id());
+                
+                $entity->setRevisionLogMessage('Set moderation state to draft programmatically.');
+
+                try {
+                    if ($entity->save()) {
+                        \Drupal::messenger()->addMessage('Set moderation state to draft programmatically.');
+                    } else {
+                        \Drupal::messenger()->addError('Entity save returned false.');
+                    }
+                } catch (\Exception $e) {
+                    \Drupal::messenger()->addError('An error occurred during entity save: ' . $e->getMessage());
+                }
+            }
+        }
+    }
+}
