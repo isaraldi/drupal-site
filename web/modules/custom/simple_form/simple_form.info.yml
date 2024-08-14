@@ -1,0 +1,12 @@
+name: 'Practical Coding Challenges'
+description: 'Provides a simple form with two fields: a text
+field and a select list. Upon submission, the form should save the data to a
+custom table in the database and display a confirmation message.'
+package: Assessment
+core_version_requirement: ^10
+type: module
+
+version: '1.0'
+datestamp: 1630242476
+dependencies:
+  - drupal:field

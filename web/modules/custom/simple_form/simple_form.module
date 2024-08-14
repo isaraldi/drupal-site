@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains the implementation of the Simple Form module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function simple_form_install() {
+  \Drupal::database()->schema()->createTable('simple_form_data', [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'text_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'select_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ]);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_form_uninstall() {
+  \Drupal::database()->schema()->dropTable('simple_form_data');
+}
