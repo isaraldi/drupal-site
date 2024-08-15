@@ -6,13 +6,17 @@
 //  */
 
 function drupal_site_core_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+    static $is_updating = FALSE;
+
+    if ($is_updating) {
+        return;
+    }
+
     if ($entity->getEntityTypeId() == 'media' && $entity->bundle() == 'remote_video') {
         $node = \Drupal::routeMatch()->getParameter('node');
         
         if ($node && !$node->isDefaultRevision()) {
-            
             if ($entity->hasField('moderation_state') && $entity->get('moderation_state')->value !== 'draft') {
-                
                 $violations = $entity->validate();
                 if (count($violations) > 0) {
                     foreach ($violations as $violation) {
@@ -26,6 +30,8 @@ function drupal_site_core_entity_update(Drupal\Core\Entity\EntityInterface $enti
                     return;
                 }
                 
+                $is_updating = TRUE;
+
                 $entity->set('moderation_state', 'draft');
                 
                 $entity->setNewRevision(TRUE);
@@ -43,6 +49,8 @@ function drupal_site_core_entity_update(Drupal\Core\Entity\EntityInterface $enti
                 } catch (\Exception $e) {
                     \Drupal::messenger()->addError('An error occurred during entity save: ' . $e->getMessage());
                 }
+
+                $is_updating = FALSE; 
             }
         }
     }
