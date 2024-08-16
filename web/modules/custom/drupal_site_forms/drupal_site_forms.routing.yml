@@ -5,3 +5,11 @@ drupal_site_forms.drupal_site:
     _form: 'Drupal\drupal_site_forms\Form\DrupalSiteForm'
   requirements:
     _permission: 'access content'
+
+drupal_site_forms.example:
+  path: '/drupal-site-forms/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\drupal_site_forms\Controller\DrupalSiteFormsController'
+  requirements:
+    _permission: 'access content'
