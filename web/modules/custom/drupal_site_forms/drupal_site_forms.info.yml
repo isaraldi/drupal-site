@@ -1,0 +1,5 @@
+name: 'drupal_site_forms'
+type: module
+description: 'Drupal site forms'
+package: Custom
+core_version_requirement: ^10 || ^11
