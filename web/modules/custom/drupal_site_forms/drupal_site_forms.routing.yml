@@ -1,0 +1,7 @@
+drupal_site_forms.drupal_site:
+  path: '/drupal-site-forms/drupal-site'
+  defaults:
+    _title: 'Drupal Site'
+    _form: 'Drupal\drupal_site_forms\Form\DrupalSiteForm'
+  requirements:
+    _permission: 'access content'
