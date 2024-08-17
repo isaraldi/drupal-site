@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Install file for Zoocha Simple Form module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database schema for storing form submissions.
+ */
+function zoocha_simple_form_schema() {
+  $schema['zoocha_simple_form_data'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'text_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'select_field' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
+}

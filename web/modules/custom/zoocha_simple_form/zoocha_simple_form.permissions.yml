@@ -1,0 +1,4 @@
+# Permission for accessing the Zoocha Simple Form.
+access zoocha simple form:
+  title: 'Access Zoocha Simple Form'
+  description: 'Permission to access the Zoocha simple form.'

@@ -1,0 +1,7 @@
+name: 'Zoocha Simple Form'
+type: module
+description: 'Provides a simple form with text and select fields.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:system

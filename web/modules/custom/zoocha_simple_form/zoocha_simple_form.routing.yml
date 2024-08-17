@@ -1,0 +1,8 @@
+# Route definition for accessing the Zoocha Simple Form.
+zoocha_simple_form.form:
+  path: '/zoocha-simple-form' # URL path to access the form.
+  defaults:
+    _form: '\Drupal\zoocha_simple_form\Form\ZoochaSimpleForm' # The form class.
+    _title: 'Zoocha Simple Form' # Title of the page displaying the form.
+  requirements:
+    _permission: 'access zoocha simple form' # Permission required to access the form.
