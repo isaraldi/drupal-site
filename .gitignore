@@ -67,3 +67,4 @@
 
 # Ignore IDE files
 /.idea
+.ddev
