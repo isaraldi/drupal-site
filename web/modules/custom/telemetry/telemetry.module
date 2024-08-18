@@ -4,3 +4,127 @@
  * @file
  * Primary module hooks for telemetry module.
  */
+
+declare(strict_types=1);
+
+namespace Drupal\telemetry;
+
+use Drupal\telemetry\Module\TelemetryModule as Telemetry;
+
+final class Module {
+
+  use Telemetry;
+
+  const TABLE_NAME = 'telemetry';
+
+  const TABLE_FIELDS = [
+    'id' => [
+      'type'     => 'serial',
+      'not null' => TRUE,
+    ],
+    'message' => [
+      'type'        => 'text',
+      'not null'    => TRUE,
+      'description' => 'Message content.',
+      '#type'       => 'textarea',
+      '#title'      => 'Message',
+    ],
+    'message_type' => [
+      'type'        => 'varchar',
+      'length'      => 16,
+      'not null'    => TRUE,
+      'description' => 'Message type.',
+      '#type'       => 'select',
+      '#title'      => 'Select the message type',
+      '#options'    => [
+        'addMessage' => 'Message',
+        'addError'   => 'Error',
+        'addStatus'  => 'Status',
+        'addWarning' => 'Warning',
+      ],
+    ],
+  ];
+
+
+  private static function message(string $type = 'Status', string $method = '', string $message = ''): void {
+    \Drupal::messenger()->{"add{$type}"}(self::telemetry($type, $method, $message));
+  }
+
+  public static function extractSchema(array $array = []): array {
+    foreach ($array as $field => $sub) {
+      foreach ($sub as $index => $val) {
+        if ($index[0] === '#') {
+          unset($array[$field][$index]);
+        }
+      }
+    }
+    return $array;
+  }
+
+  /**
+   * extractFields
+   *
+   * @param  mixed $array
+   * @param  mixed $selected
+   * @param  mixed $translator_callback
+   * @param  mixed $translate_fields
+   * @return array
+   */
+  public static function extractFields(array $array, array $selected, callable $translator_callback, array $translate_fields = ['#title', '#options']): array {
+    foreach ($array as $field => $options) {
+      if (!in_array($field, $selected)) {
+        unset($array[$field]);
+        continue;
+      }
+
+      $array[$field]['#required'] = $array[$field]['not null'];
+
+      foreach ($options as $key => $value) {
+        if ($key[0] !== '#') {
+          unset($array[$field][$key]);
+        }
+      }
+    }
+
+    foreach ($array as $field => $options) {
+      foreach ($options as $option => $value) {
+        if (in_array($option, $translate_fields)) {
+          if (gettype($value) === 'string') {
+            $array[$field][$option] = $translator_callback($value);
+          }
+          if (gettype($value) === 'array') {
+            foreach ($value as $sub => $data) {
+              $array[$field][$option][$sub] = $translator_callback($data);
+            }
+          }
+        }
+      }
+    }
+    return $array;
+  }
+
+  public static function install(): void {
+    try {
+      \Drupal::database()
+        ->schema()
+        ->createTable(self::TABLE_NAME, [
+          'fields' => self::extractSchema(self::TABLE_FIELDS),
+          'primary key' => ['id'],
+        ]);
+    } catch (\Throwable $th) {
+      self::message('Error', __METHOD__, 'Error creating ' . self::TABLE_NAME . ': '. $th->getMessage());
+    } finally {
+      self::message('Status', __METHOD__, 'Table ' . self::TABLE_NAME . ' created.');
+    }
+  }
+
+  public static function uninstall(): void {
+    try {
+      \Drupal::database()->schema()->dropTable(self::TABLE_NAME);
+    } catch (\Throwable $th) {
+      self::message('Error', __METHOD__, 'Error deleting ' . self::TABLE_NAME . ': '. $th->getMessage());
+    } finally {
+      self::message('Status', __METHOD__, 'Table ' . self::TABLE_NAME . ' deleted.');
+    }
+  }
+}
