@@ -1,0 +1,5 @@
+name: 'telemetry'
+type: module
+description: 'Provides some kind of telemetry.'
+package: Custom
+core_version_requirement: ^10 || ^11
