@@ -6,6 +6,7 @@ namespace Drupal\telemetry\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\telemetry\Module as Module;
 
 /**
  * Provides a Telemetry form.
@@ -19,26 +20,29 @@ final class TelemetryForm extends FormBase {
     return 'telemetry_telemetry';
   }
 
+  private function getFields(array $form = []): array {
+    return array_merge($form, Module::extractFields(
+      Module::TABLE_FIELDS,
+      ['message', 'message_type'],
+      function ($translate) {
+        return $this->t($translate);
+      }));
+  }
+
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
-
-    $form['message'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Message'),
-      '#required' => TRUE,
-    ];
-
-    $form['actions'] = [
-      '#type' => 'actions',
-      'submit' => [
-        '#type' => 'submit',
-        '#value' => $this->t('Send'),
-      ],
-    ];
-
-    return $form;
+    Module::telemetry('Status', $this, 'Accessing method *'.__METHOD__.'*.');
+    return $this->getFields([
+      'actions' => [
+        '#type'  => 'actions',
+        'submit' => [
+          '#type'  => 'submit',
+          '#value' => $this->t('Send'),
+        ],
+      ]
+    ]);
   }
 
   /**
@@ -61,6 +65,12 @@ final class TelemetryForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
+    Module::telemetry(
+      $form_state->getValue('message_type'),
+      $this,
+      'Accessing method *'.__METHOD__.'*. ',
+      $form_state->getValue('message')
+    );
     $this->messenger()->addStatus($this->t('The message has been sent.'));
     $form_state->setRedirect('<front>');
   }
