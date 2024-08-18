@@ -4,3 +4,25 @@
  * @file
  * Install, update and uninstall functions for the telemetry module.
  */
+
+
+use Drupal\telemetry\Module as Module;
+
+/**
+ * @file
+ * Install and update functions for the Test Form module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function telemetry_install() {
+  Module::install();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function telemetry_uninstall() {
+  Module::uninstall();
+}
