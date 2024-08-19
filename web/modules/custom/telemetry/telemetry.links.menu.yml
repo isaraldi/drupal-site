@@ -1,0 +1,5 @@
+telemetry.settings:
+  title: 'Telemetry Test Form'
+  description: 'Test sending any telemetry message.'
+  route_name: telemetry.telemetry
+  parent: system.admin_config_system
