@@ -31,11 +31,9 @@ trait TelemetryModule {
    * @return string Original message.
    */
   public static function telemetry($type, $origin = __CLASS__, string $message = '', $more_info = []): string {
-    // $config = \Drupal::config('telemetry.settings');
-    // die('<pre>wololo 2<br>'.print_r($config->get('slack.key'), true));
     $now = date('Y/m/d H:i:s');
     \Drupal::httpClient()
-      ->post('https://hooks.slack.com/services/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', [
+      ->post('https://hooks.slack.com/services/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', [
         'headers' => ['Content-type' => 'Content-type: application/json'],
         'body' => json_encode([
           "blocks" => [
