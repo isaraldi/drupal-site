@@ -46,10 +46,28 @@ final class Module {
   ];
 
 
+  /**
+   * message
+   *
+   * Hook to send the Drupal message also to the Telemetry.
+   *
+   * @param  mixed $type    Type of the message (see Drupal class Messenger for more information https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Messenger%21Messenger.php/class/Messenger/10).
+   * @param  mixed $method  Originary method.
+   * @param  mixed $message Message.
+   * @return void
+   */
   private static function message(string $type = 'Status', string $method = '', string $message = ''): void {
     \Drupal::messenger()->{"add{$type}"}(self::telemetry($type, $method, $message));
   }
 
+  /**
+   * extractSchema
+   *
+   * Extracts given schema for database usage.
+   *
+   * @param  array $array Schema to be filtered.
+   * @return array Filtered schema.
+   */
   public static function extractSchema(array $array = []): array {
     foreach ($array as $field => $sub) {
       foreach ($sub as $index => $val) {
@@ -64,11 +82,13 @@ final class Module {
   /**
    * extractFields
    *
-   * @param  mixed $array
-   * @param  mixed $selected
-   * @param  mixed $translator_callback
-   * @param  mixed $translate_fields
-   * @return array
+   * Extracts schema and translates given fields.
+   *
+   * @param  array    $array               Schema to be filtered.
+   * @param  array    $selected            Selected filter.
+   * @param  callable $translator_callback Callback to translator method.
+   * @param  array    $translate_fields    Look for translate this fields.
+   * @return array Extracted and translated schema.
    */
   public static function extractFields(array $array, array $selected, callable $translator_callback, array $translate_fields = ['#title', '#options']): array {
     foreach ($array as $field => $options) {
@@ -103,6 +123,13 @@ final class Module {
     return $array;
   }
 
+  /**
+   * install
+   *
+   * Performs module instalation.
+   *
+   * @return void
+   */
   public static function install(): void {
     try {
       \Drupal::database()
@@ -118,6 +145,13 @@ final class Module {
     }
   }
 
+  /**
+   * uninstall
+   *
+   * Performs module uninstall.
+   *
+   * @return void
+   */
   public static function uninstall(): void {
     try {
       \Drupal::database()->schema()->dropTable(self::TABLE_NAME);

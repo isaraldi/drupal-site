@@ -1,5 +1,5 @@
 telemetry.telemetry:
-  path: '/telemetry/telemetry'
+  path: '/admin/telemetry'
   defaults:
     _title: 'Telemetry'
     _form: 'Drupal\telemetry\Form\TelemetryForm'

@@ -24,13 +24,18 @@ trait TelemetryModule {
    *
    * Sends telemetry messages to the mothership.
    *
-   * @param  string $message
-   * @return string
+   * @param  mixed $type      Type of message to be sent.
+   * @param  mixed $origin    Class origin of the message.
+   * @param  mixed $message   Message payload.
+   * @param  mixed $more_info More information to append to the message.
+   * @return string Original message.
    */
   public static function telemetry($type, $origin = __CLASS__, string $message = '', $more_info = []): string {
+    // $config = \Drupal::config('telemetry.settings');
+    // die('<pre>wololo 2<br>'.print_r($config->get('slack.key'), true));
     $now = date('Y/m/d H:i:s');
     \Drupal::httpClient()
-      ->post('https://hooks.slack.com/services/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', [
+      ->post('https://hooks.slack.com/services/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', [
         'headers' => ['Content-type' => 'Content-type: application/json'],
         'body' => json_encode([
           "blocks" => [

@@ -20,6 +20,15 @@ final class TelemetryForm extends FormBase {
     return 'telemetry_telemetry';
   }
 
+  /**
+   * getFields
+   *
+   * Should return form fields processed, merged with the provided ones and
+   * extracted taking the list of parameters.
+   *
+   * @param  array $form Form fields to append.
+   * @return array Form fields processed.
+   */
   private function getFields(array $form = []): array {
     return array_merge($form, Module::extractFields(
       Module::TABLE_FIELDS,
