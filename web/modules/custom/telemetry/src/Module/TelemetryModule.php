@@ -33,7 +33,7 @@ trait TelemetryModule {
   public static function telemetry($type, $origin = __CLASS__, string $message = '', $more_info = []): string {
     $now = date('Y/m/d H:i:s');
     \Drupal::httpClient()
-      ->post('https://hooks.slack.com/services/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', [
+      ->post('https://hooks.slack.com/services/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', [
         'headers' => ['Content-type' => 'Content-type: application/json'],
         'body' => json_encode([
           "blocks" => [
