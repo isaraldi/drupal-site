@@ -1,0 +1,11 @@
+content manager:
+  title: 'Content manager'
+  description: 'Can move from "Draft" to "Review".'
+
+editor:
+  title: 'Editor'
+  description: 'Can approve content.'
+
+chief editor:
+  title: 'Chief Editor'
+  description: 'Can publish content.'

@@ -4,3 +4,54 @@
  * @file
  * Contains drupal_site_core.module.
  */
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\media\Entity\Media;
+
+final class EntityManager {
+  public static $changed = [];
+
+  public static $updating = false;
+
+  public static function checkAtomicity(EntityInterface $entity): bool {
+    $element = $entity->bundle() . $entity->id();
+    if (in_array($element, self::$changed)) {
+      return true;
+    }
+    self::$changed []= $element;
+    return false;
+  }
+
+  public static function checkEntity(EntityInterface $entity) {
+    if (self::checkAtomicity($entity)) {
+      return;
+    }
+    if ($entity->getEntityTypeId() == 'media' && $entity->bundle() == 'remote_video') {
+      $node = \Drupal::routeMatch()->getParameter('node');
+
+      if ($node && !$node->isDefaultRevision()) {
+          if ($entity->hasField('moderation_state') && $entity->get('moderation_state')->value !== 'draft') {
+              self::$updating = TRUE;
+
+              $entity->set('moderation_state', 'draft');
+              $entity->setNewRevision(TRUE);
+              $entity->save();
+
+              self::$updating = FALSE;
+          }
+      }
+    }
+  }
+}
+
+function drupal_site_core_entity_presave(EntityInterface $entity) {
+  EntityManager::checkEntity($entity);
+}
+
+
+function hook_site_core_entity_presave(EntityInterface $entity) {
+  // Update the entity's entry in a fictional table of this type of entity.
+  die('hoooked');
+}
+

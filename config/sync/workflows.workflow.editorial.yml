@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - media.type.remote_video
     - node.type.landing_page
   module:
     - content_moderation
@@ -62,6 +63,8 @@ type_settings:
       to: published
       weight: 1
   entity_types:
+    media:
+      - remote_video
     node:
       - landing_page
   default_moderation_state: draft
