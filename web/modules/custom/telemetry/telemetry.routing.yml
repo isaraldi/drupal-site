@@ -1,0 +1,7 @@
+telemetry.telemetry:
+  path: '/admin/telemetry'
+  defaults:
+    _title: 'Telemetry'
+    _form: 'Drupal\telemetry\Form\TelemetryForm'
+  requirements:
+    _permission: 'telemetry'

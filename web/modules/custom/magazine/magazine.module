@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Magazine module.
+ */
+declare(strict_types=1);
+
+namespace Drupal\magazine;
+
+final class Module {
+
+  public static function createRoles(): void {
+    //your data array
+    $data = array('id' => 'client', 'label' => 'Client');
+    //creating your role
+    $role = \Drupal\user\Entity\Role::create($data);
+    //saving your role
+    $role->save();
+  }
+
+
+  /**
+   * install
+   *
+   * Performs module instalation.
+   *
+   * @return void
+   */
+  public static function install(): void {
+    // install module
+  }
+
+  /**
+   * uninstall
+   *
+   * Performs module uninstall.
+   *
+   * @return void
+   */
+  public static function uninstall(): void {
+    // uninstall module
+  }
+}

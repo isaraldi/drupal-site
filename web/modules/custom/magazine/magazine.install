@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Magazine module.
+ */
+use Drupal\magazine\Module as Module;
+
+/**
+ * Implements hook_install().
+ */
+function magazine_install() {
+  Module::install();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function magazine_uninstall() {
+  Module::uninstall();
+}
