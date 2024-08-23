@@ -1,0 +1,13 @@
+name: Magazine Issues
+type: module
+description: 'Custom entity type for managing magazine issues.'
+package: Magazine Issues Custom Entity
+core_version_requirement: ^9.3 || ^10
+dependencies:
+  - drupal:field
+  - drupal:user
+  - drupal:language
+  - serial
+  - datetime
+  - file
+  - rules

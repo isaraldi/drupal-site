@@ -1,0 +1,36 @@
+uuid: cd50fd6f-5f96-4ef0-a074-1618c5597a27
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.magazine_issues.field_content
+    - field.field.node.magazine_issues.field_cover_image
+    - field.field.node.magazine_issues.field_issue_number
+    - field.field.node.magazine_issues.field_publication_date
+    - node.type.magazine_issues
+  module:
+    - user
+_core:
+  default_config_hash: llr6wjSJnngE1zf3Gg9B9MKiDBqNFFcMsdDCTADFnnU
+id: node.magazine_issues.teaser
+targetEntityType: node
+bundle: magazine_issues
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_content: true
+  field_cover_image: true
+  field_issue_number: true
+  field_publication_date: true
+  langcode: true

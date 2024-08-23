@@ -16,14 +16,19 @@
     ],
     "require": {
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
         "drupal/core-composer-scaffold": "10.3.2",
         "drupal/core-project-message": "10.3.2",
         "drupal/core-recommended": "10.3.2",
         "drupal/entity_browser": "^2.10",
+        "drupal/entity_workflow": "^2.0@alpha",
         "drupal/gin": "^3.0@RC",
         "drupal/inline_entity_form": "^3.0@RC",
         "drupal/paragraphs": "^1.17",
+        "drupal/rules": "^4.0",
+        "drupal/serial": "^2.0@beta",
+        "drupal/workflows_field": "^2.1",
         "drush/drush": "^12.5"
     },
     "conflict": {
@@ -38,7 +43,8 @@
             "drupal/core-project-message": true,
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true
         },
         "sort-packages": true
     },
@@ -47,6 +53,10 @@
             "locations": {
                 "web-root": "web/"
             }
+        },
+        "enable-patching": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
         },
         "installer-paths": {
             "web/core": [
@@ -76,6 +86,11 @@
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
+        },
+        "patches": {
+            "drupal/serial": {
+                "Issue 2929297: Disabled widget addition": "https://www.drupal.org/files/issues/2024-03-07/serial-disabled_widget-2929297-10.patch"
+            }
         },
         "drupal-core-project-message": {
             "include-keys": [

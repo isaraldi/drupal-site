@@ -1,0 +1,120 @@
+uuid: 55e76ec1-9023-4cc5-a3e2-bf4aa16bbcbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine_issues
+  module:
+    - content_moderation
+_core:
+  default_config_hash: Csms0ZviF-RagQxysIJ9_6lbjdXw6oEX42atTJUI1Bs
+id: magazine
+label: Magazine
+type: content_moderation
+type_settings:
+  states:
+    approved:
+      label: Approved
+      weight: -1
+      published: false
+      default_revision: false
+      id: approved
+    draft:
+      label: Draft
+      weight: -3
+      published: false
+      default_revision: true
+      id: draft
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: false
+      id: published
+    review:
+      label: Review
+      weight: -2
+      published: false
+      default_revision: false
+      id: review
+  transitions:
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+      to: draft
+      weight: -2
+    to_approved:
+      label: Approve
+      from:
+        - review
+      to: approved
+      weight: 0
+      id: to_approved
+      required_permissions:
+        - 'approve content'
+    to_published:
+      label: Publish
+      from:
+        - approved
+      to: published
+      weight: 1
+      id: to_published
+      required_permissions:
+        - 'publish content'
+    to_review:
+      label: 'Submit for Review'
+      from:
+        - draft
+      to: review
+      weight: -1
+      id: to_review
+      required_permissions:
+        - 'transition to review'
+  entity_types:
+    node:
+      - magazine_issues
+  default_moderation_state: draft
+  permissions:
+    'transition to review':
+      - content_manager
+    'approve content':
+      - editor
+    'publish content':
+      - chief_editor
+  access_control:
+    -
+      role: content_manager
+      permissions:
+        - 'transition to review'
+        - 'view own content'
+        - 'edit own content'
+        - 'edit any content'
+      languages:
+        - fr
+    -
+      role: editor
+      permissions:
+        - 'approve content'
+        - 'view own content'
+        - 'edit own content'
+        - 'edit any content'
+      languages:
+        - en
+    -
+      role: chief_editor
+      permissions:
+        - 'publish content'
+        - 'view own content'
+        - 'edit own content'
+        - 'edit any content'
+      languages:
+        - en
+  field_permissions:
+    -
+      role: editor
+      fields:
+        - content
+      restrictions:
+        - 'edit fields except content'

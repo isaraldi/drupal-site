@@ -1,0 +1,26 @@
+uuid: d060d6ca-c63b-4cbe-933c-d44b98467dd4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_date
+    - node.type.magazine_issues
+  module:
+    - datetime
+_core:
+  default_config_hash: yZKjH9DwPc7TI3U52If1JKwnK0twdjNuoI-esE7J2eU
+id: node.magazine_issues.field_publication_date
+field_name: field_publication_date
+entity_type: node
+bundle: magazine_issues
+label: 'Publication date'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

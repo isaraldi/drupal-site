@@ -1,0 +1,25 @@
+uuid: 1506dde3-6df1-4c71-a0c3-f1b126523a2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_number
+    - node.type.magazine_issues
+  module:
+    - serial
+_core:
+  default_config_hash: nEAkxAQmOzqKHBOj1ZOyR0XWe-1_cOE79iv7rZgqdCU
+id: node.magazine_issues.field_issue_number
+field_name: field_issue_number
+entity_type: node
+bundle: magazine_issues
+label: 'Issue number'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings: {  }
+field_type: serial

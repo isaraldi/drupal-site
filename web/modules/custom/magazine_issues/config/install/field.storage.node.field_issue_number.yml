@@ -1,0 +1,23 @@
+uuid: 1c66d536-9804-4dbc-b495-5f7cb33ba57a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - serial
+_core:
+  default_config_hash: XtWmuol2G2n4RzzNhDKLgHyyV3SlF2-Uf5W7IfBZp2E
+id: node.field_issue_number
+field_name: field_issue_number
+entity_type: node
+type: serial
+settings:
+  start_value: 1
+  init_existing_entities: 0
+module: serial
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

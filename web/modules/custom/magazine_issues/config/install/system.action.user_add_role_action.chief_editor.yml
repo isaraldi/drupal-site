@@ -1,0 +1,16 @@
+uuid: 82de2c8d-a102-4b96-b30f-7357571be226
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.chief_editor
+  module:
+    - user
+_core:
+  default_config_hash: YyXbyvvy35SSWSMosUbNEvQIy1tXVKSAmQDaEKS0Q_I
+id: user_add_role_action.chief_editor
+label: 'Add the Chief Editor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: chief_editor

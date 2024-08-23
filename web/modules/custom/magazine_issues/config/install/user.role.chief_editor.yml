@@ -1,0 +1,26 @@
+uuid: 2f2f008a-bccd-4648-a0dc-f871dc344569
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine_issues
+    - workflows.workflow.editorial
+    - workflows.workflow.magazine
+  module:
+    - content_moderation
+    - node
+_core:
+  default_config_hash: ySEwuIgDRzo_SS1NxRZgqWYizAfO6_Hlg-wViTnamtw
+id: chief_editor
+label: 'Chief Editor'
+weight: 6
+is_admin: null
+permissions:
+  - 'delete any magazine_issues content'
+  - 'delete magazine_issues revisions'
+  - 'delete own magazine_issues content'
+  - 'edit own magazine_issues content'
+  - 'revert magazine_issues revisions'
+  - 'use editorial transition publish'
+  - 'use magazine transition to_published'
+  - 'view magazine_issues revisions'
