@@ -1,0 +1,13 @@
+uuid: b8bb277f-a852-46db-82b5-de558510f6f1
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: tU-BrQrvcDbyBJRfFg6cugfghHr-6aE2KdlGa8ixu5U
+id: user.user
+target_entity_type_id: user
+target_bundle: user
+default_langcode: site_default
+language_alterable: false

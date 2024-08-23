@@ -1,0 +1,27 @@
+uuid: 7f558009-0c4e-456a-89ae-83664b474388
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine_issues
+    - workflows.workflow.editorial
+    - workflows.workflow.magazine
+  module:
+    - content_moderation
+    - node
+_core:
+  default_config_hash: F9EZvOfyj-TIAK1hbY-GB9MSBpx-nS_08fCzi_7OZ_Y
+id: content_manager
+label: 'Content Manager'
+weight: 4
+is_admin: null
+permissions:
+  - 'create magazine_issues content'
+  - 'delete own magazine_issues content'
+  - 'edit own magazine_issues content'
+  - 'revert magazine_issues revisions'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition create_new_draft'
+  - 'use magazine transition to_review'
+  - 'view latest version'
+  - 'view magazine_issues revisions'

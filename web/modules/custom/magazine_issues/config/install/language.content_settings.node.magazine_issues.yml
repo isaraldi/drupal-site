@@ -1,0 +1,13 @@
+uuid: 090daedc-e379-4c70-bf4e-17697e2afba5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine_issues
+_core:
+  default_config_hash: rCplXDsX6bosyH2GOPGRCP96WKie7nKri_V1526X6Ec
+id: node.magazine_issues
+target_entity_type_id: node
+target_bundle: magazine_issues
+default_langcode: site_default
+language_alterable: true

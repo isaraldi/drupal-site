@@ -1,0 +1,22 @@
+uuid: 2dbfb56d-66e7-4580-a54f-5e5a04fe9d7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine_issues
+    - workflows.workflow.magazine
+  module:
+    - content_moderation
+    - node
+_core:
+  default_config_hash: bebR92odkYwCox4MJ5dXyYd3VJumxcgtr1KMu-jwt7U
+id: editor
+label: Editor
+weight: 5
+is_admin: null
+permissions:
+  - 'delete own magazine_issues content'
+  - 'edit any magazine_issues content'
+  - 'edit own magazine_issues content'
+  - 'use magazine transition to_approved'
+  - 'view magazine_issues revisions'

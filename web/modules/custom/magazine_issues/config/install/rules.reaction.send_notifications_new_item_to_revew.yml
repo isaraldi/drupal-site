@@ -1,0 +1,87 @@
+uuid: f6e3b079-3431-4282-b9c8-fbe1d29697eb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: uTXBz2wQIlpfo_Q2OvXX6K_hyIQHUQX7V1sl2xD58KY
+id: send_notifications_new_item_to_revew
+label: 'Send Notifications New item to Revew'
+events:
+  -
+    event_name: 'rules_entity_update:node--magazine_issues'
+description: 'Notify the editor when an issue is moved to "Review"'
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 8de567c5-0f3f-4df1-9f66-064b4896c1d4
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: d1eaee99-c8be-444c-8770-1c80b8533f9f
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 4046473b-cea1-49df-93ea-16ac6bb5bde4
+        weight: 0
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+        context_values:
+          type: node
+          bundle: magazine_issue
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+      -
+        id: rules_condition
+        uuid: a3ae2c86-7c91-4bad-aa1e-d3d9afd134d3
+        weight: 0
+        condition_id: rules_data_comparison
+        negate: false
+        context_values:
+          operation: '=='
+          value: review
+        context_mapping:
+          data: node.moderation_state.value
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+  actions:
+    id: rules_action_set
+    uuid: 030c9145-fb9f-491c-af86-99cc26355023
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: c8cb84df-033c-43ca-a17e-2752da4effa6
+        weight: 0
+        action_id: rules_email_to_users_of_role
+        context_values:
+          roles:
+            - editor
+          subject: 'New Magazine Issue moved to "Review"'
+          message: 'Please access the Magazine issues list and check if any item is waiting for your Review.'
+          reply: ''
+          language: ''
+        context_mapping: {  }
+        context_processors:
+          roles:
+            rules_tokens: {  }
+          subject:
+            rules_tokens: {  }
+          message:
+            rules_tokens: {  }
+          reply:
+            rules_tokens: {  }
+          language:
+            rules_tokens: {  }
+        provides_mapping: {  }

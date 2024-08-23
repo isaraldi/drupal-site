@@ -1,0 +1,16 @@
+uuid: f11367b9-5a0d-45a2-84d0-c939f2c12178
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.chief_editor
+  module:
+    - user
+_core:
+  default_config_hash: DLrXBvKfEyn9XRa9Y7sCIc1W71YVrQsBqp0khJ52Ok8
+id: user_remove_role_action.chief_editor
+label: 'Remove the Chief Editor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: chief_editor
